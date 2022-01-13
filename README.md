@@ -12,7 +12,7 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Getting Started
+## The Mortgage API
 
 There is an API route available at /mortgageCalculation which will take the following query parameters:
 
