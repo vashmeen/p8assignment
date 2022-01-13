@@ -12,6 +12,11 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Your Task
+
+Your task can be found here:
+[CodeExercise.pdf](https://github.com/Produce8/P8FrontendAssignment/files/7866178/CodeExercise.pdf)
+
 ## The Mortgage API
 
 There is an API route available at /mortgageCalculation which will take the following query parameters:
@@ -33,3 +38,4 @@ If there is an error, the response will look like this:
 ```
 error: [string]
 ```
+
