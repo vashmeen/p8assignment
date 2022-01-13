@@ -22,4 +22,14 @@ annualInterestRate: [number]
 termOfLoan: [number]
 ```
 
-if you POST to that endpoint, you will receive a monthly payment calculation in response.
+if you POST to that endpoint, you will receive a monthly payment calculation in response that will look like this:
+
+```
+monthlyPayment: [number]
+```
+
+If there is an error, the response will look like this:
+
+```
+error: [string]
+```

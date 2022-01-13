@@ -17,11 +17,10 @@ export default function handler(
   res: NextApiResponse<Data>
 ) {
   if(req.method === 'POST'){
-    // const value = req.value;
     const {principal, annualInterestRate, termOfLoan} = req.query;
     const values = calculatePayment({principal: parseInt(principal.toString()), annualInterestRate:parseInt(annualInterestRate.toString()), termOfLoan:parseInt(termOfLoan.toString())});
-    console.log('values', values);
-    res.status(200).json({ monthlyPayment: values })
+    if(values !== "NaN") res.status(200).json({ monthlyPayment: values })
+    else res.status(400).json({ error: 'There was a problem calculating your mortgage. Please check your inputs' })
 }else{
     res.status(400).json({ error: 'Only accepts POST' })
 }
