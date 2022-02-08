@@ -30,7 +30,7 @@ Please build the mockup from the document above in a copy of the repository prov
 
 ## The Mortgage API
 
-There is an API route available at /mortgageCalculation which will take the following query parameters:
+There is an API route available at /api/mortgageCalculation which will take the following query parameters:
 
 ```
 principal: [number]
