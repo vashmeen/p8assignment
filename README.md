@@ -17,10 +17,11 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 Your task can be found here:
 [CodeExercise.pdf](https://github.com/Produce8/P8FrontendAssignment/files/7866197/CodeExercise.pdf)
 
-*Things to think about*
+**The task**
+
 Please build the mockup from the document above in a copy of the repository provided, getting as close as possible to the mockup visually. The repository has an api available already to get the calculated monthly payment based on the inputs, which you should use to get the calculated monthly payment. Feel free to use any component library to help you get started. The font is Inter (https://fonts.google.com/specimen/Inter), and the logo is included in the provided repository.
 
-*Things to think about*
+**Things to think about**
 - What happens if the server returns an error?
 - What happens while waiting for a response?
 - How can this be made accessible?
