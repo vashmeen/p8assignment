@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { ErrorMessage } from '@hookform/error-message';
 import Button from '../components/Button';
 import { formatNumber } from '../utils/formatter';
-
+import { debounce } from '../utils/debounce';
 const schema = z.object({
   principal: z
     .string()
@@ -62,6 +62,16 @@ const Home: NextPage = () => {
   };
 
   const termOfLoan = useWatch({ control, name: 'termOfLoan' });
+
+  // const debouncedRegister = (fieldName: string) => {
+  //   const { ref, name, onChange, onBlur } = register(fieldName);
+
+  //   const debouncedOnChange = (e) => {
+  //     debounce((e) => onChange(e), 300);
+  //   };
+  // };
+  const debouncedOnInput = debounce((e) => handleSubmit(onSubmit)(e), 500);
+
   return (
     <div className=' p-4 '>
       <div className='max-w-screen-lg mx-auto '>
@@ -75,8 +85,8 @@ const Home: NextPage = () => {
           <form
             id='mortgage-calculator-form'
             className='grid gap-4'
-            onInput={handleSubmit(onSubmit)}
-            // onSubmit={(e) => e.preventDefault()}
+            onInput={debouncedOnInput}
+            onSubmit={(e) => e.preventDefault()}
           >
             <div className='grid gap-2 focus-within:ring-purple-300'>
               <label htmlFor='price' className='grid text-slate-400 font-medium text-sm'>
@@ -86,7 +96,15 @@ const Home: NextPage = () => {
                 <span>$</span>
                 {formatNumber(Number(watch('principal')))}
               </p>
-              <input id='price' type='range' min='50000' max='2500000' step='50000' {...register('principal')} />
+              <input
+                id='price'
+                type='range'
+                min='50000'
+                max='2500000'
+                step='50000'
+                {...register('principal')}
+                // onChange={(e) => debounce(() => register('principal').onChange(e), 5000)}
+              />
             </div>
             <div className='grid gap-2 focus-within:ring-purple-300'>
               <label htmlFor='interest' className='grid text-slate-400 font-bold text-sm  '>
@@ -95,13 +113,22 @@ const Home: NextPage = () => {
               <p aria-hidden className='font-medium text-2xl'>
                 {watch('annualInterestRate')}%
               </p>
-              <input type='range' id='interest' min='0' max='25' step='0.5' {...register('annualInterestRate')} />
+              <input
+                type='range'
+                id='interest'
+                min='0'
+                max='25'
+                step='0.5'
+                {...register('annualInterestRate')}
+                // onChange={(e) => debounce(() => register('annualInterestRate').onChange(e), 5000)}
+              />
             </div>
             <fieldset className='grid gap-4 focus-within:ring-purple-300'>
               <legend className='mb-4 text-slate-400 font-bold text-sm'>Period</legend>
               <label className='flex items-center gap-3 font-medium '>
                 <input
                   {...register('termOfLoan')}
+                  // onChange={(e) => debounce(() => register('termOfLoan').onChange(e), 5000)}
                   type='radio'
                   value='20'
                   className='w-6 h-6 text-purple-900'
@@ -113,6 +140,7 @@ const Home: NextPage = () => {
               <label className='flex items-center gap-3 font-medium '>
                 <input
                   {...register('termOfLoan')}
+                  // onChange={(e) => debounce(() => register('termOfLoan').onChange(e), 5000)}
                   type='radio'
                   value='25'
                   className='w-6 h-6 text-purple-900'
@@ -123,7 +151,11 @@ const Home: NextPage = () => {
               </label>
               <label className='flex items-center gap-3 font-medium'>
                 <input
-                  {...register('termOfLoan', { onChange: (e) => console.log(e) })}
+                  {...register('termOfLoan')}
+                  // onChange={(e) => {
+                  //   console.log(e);
+                  //   debounce(() => register('termOfLoan').onChange(e), 5000);
+                  // }}
                   type='radio'
                   value='30'
                   className='w-6 h-6 text-purple-900'
@@ -249,3 +281,41 @@ const Price = ({
 //     }}
 //   />;
 // };
+
+// / A debounced input react component. For performance reasons the value changes after half a second.
+// function InputDebaounced({
+//   initialValue,
+//   onChange,
+//   debounceTime = 500,
+//   className,
+//   ...props
+// }: {
+//   initialValue: string | number;
+//   onChange: (value: string | number) => void;
+//   debounceTime?: number;
+//   className?: string;
+// } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'>) {
+//   const [value, setValue] = useState(initialValue);
+
+//   useEffect(() => {
+//     setValue(initialValue);
+//   }, [initialValue]);
+
+//   useEffect(() => {
+//     const timeout = setTimeout(() => {
+//       onChange(value);
+//     }, debounceTime);
+
+//     return () => clearTimeout(timeout);
+//   }, [value]);
+
+//   return (
+//     <input
+//       {...props}
+//       value={value}
+//       onChange={(e) => setValue(e.target.value)}
+//       // size={1}
+//       className={className}
+//     />
+//   );
+// }
