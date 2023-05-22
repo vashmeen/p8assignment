@@ -75,8 +75,8 @@ const Home: NextPage = () => {
           <form
             id='mortgage-calculator-form'
             className='grid gap-4'
-            onChange={handleSubmit(onSubmit)}
-            onSubmit={(e) => e.preventDefault()}
+            onInput={handleSubmit(onSubmit)}
+            // onSubmit={(e) => e.preventDefault()}
           >
             <div className='grid gap-2 focus-within:ring-purple-300'>
               <label htmlFor='price' className='grid text-slate-400 font-medium text-sm'>
@@ -106,7 +106,6 @@ const Home: NextPage = () => {
                   value='20'
                   className='w-6 h-6 text-purple-900'
                   style={{ accentColor: 'currentColor' }}
-                  checked={termOfLoan === '20'}
                   id='termOfLoan-20'
                 />
                 20 Years
@@ -118,19 +117,17 @@ const Home: NextPage = () => {
                   value='25'
                   className='w-6 h-6 text-purple-900'
                   style={{ accentColor: 'currentColor' }}
-                  checked={termOfLoan === '25'}
                   id='termOfLoan-25'
                 />
                 25 Years
               </label>
               <label className='flex items-center gap-3 font-medium'>
                 <input
-                  {...register('termOfLoan')}
+                  {...register('termOfLoan', { onChange: (e) => console.log(e) })}
                   type='radio'
                   value='30'
                   className='w-6 h-6 text-purple-900'
                   style={{ accentColor: 'currentColor' }}
-                  checked={termOfLoan === '30'}
                   id='termOfLoan-30'
                 />
                 30 Years
