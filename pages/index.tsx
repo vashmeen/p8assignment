@@ -127,7 +127,6 @@ const Home: NextPage = () => {
                 step='0.5'
                 className=' text-blue-600'
                 {...register('annualInterestRate')}
-                // onChange={(e) => debounce(() => register('annualInterestRate').onChange(e), 5000)}
               />
               <div aria-hidden className='flex justify-between'>
                 <span>0</span>
@@ -139,7 +138,6 @@ const Home: NextPage = () => {
               <label className='flex items-center gap-3 font-medium '>
                 <input
                   {...register('termOfLoan')}
-                  // onChange={(e) => debounce(() => register('termOfLoan').onChange(e), 5000)}
                   type='radio'
                   value='20'
                   className='w-6 h-6 text-purple-900 '
@@ -151,7 +149,6 @@ const Home: NextPage = () => {
               <label className='flex items-center gap-3 font-medium '>
                 <input
                   {...register('termOfLoan')}
-                  // onChange={(e) => debounce(() => register('termOfLoan').onChange(e), 5000)}
                   type='radio'
                   value='25'
                   className='w-6 h-6 text-purple-900'
@@ -163,10 +160,6 @@ const Home: NextPage = () => {
               <label className='flex items-center gap-3 font-medium'>
                 <input
                   {...register('termOfLoan')}
-                  // onChange={(e) => {
-                  //   console.log(e);
-                  //   debounce(() => register('termOfLoan').onChange(e), 5000);
-                  // }}
                   type='radio'
                   value='30'
                   className='w-6 h-6 text-purple-900'
