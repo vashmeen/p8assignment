@@ -41,10 +41,14 @@ const Notes = () => {
         through dev tools.
       </p>
       <div className='rounded-2xl !my-12 overflow-hidden shadow-2xl shadow-slate-400 isolate p-4 bg-slate-50'>
-        <Image src={image} alt='' className='rounded-lg'  />
+        <Image src={image} alt='' className='rounded-lg' />
       </div>
       <p>
-        It also provides many helpful features, such as the state of submission or validation that I used to render
+        I used zod as thee validator. Zod also provides great typescript supports that become very helpful as the project
+        grows, especially when you want to have one source of validation for backend and the frontend.
+      </p>
+      <p>
+        Moreover, React-hook-form has many helpful features, such as the state of submission or validation that I used to render
         related information accordingly. This way, I don&apos;t need to handle the state of form with useState and
         useEffects and I can be confident I don&apos;t shoot myself in the foot!
       </p>
@@ -70,11 +74,7 @@ const Notes = () => {
         Firefox responsive mode. In addition typescript type checking and eslint are used to reduce human error in the
         build time. Moreover build test are always necessary and is done for this project.
       </p>
-      <h3 className='text-2xl font-bold tracking-tight text-slate-800 !mt-8'>Form Validation</h3>
-      <p>
-        I used zod for form validation. It also provide great typescript support that become very helpful as the project
-        grows.
-      </p>
+
       <h3 className='text-2xl font-bold tracking-tight !mt-8'>Responsiveness</h3>
       <p>
         Columns are stacked in small screens, using grid auto-fit feature. Some large texts become smaller to avoid
