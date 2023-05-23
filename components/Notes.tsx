@@ -53,7 +53,7 @@ const Notes = () => {
       </p>
       <h3 className='text-2xl font-bold tracking-tight text-slate-800 !mt-8'>Testing the UI</h3>
       <p>
-        I believe manual unit tests and end-to-end test are very helpful when the app is matured and stabilized. In
+        Unit tests and end-to-end test are very helpful when the app is matured and stabilized. In
         those cases, react unit-tests of end-to-end tests can help to prevent bugs when we add new features to the
         application.{' '}
       </p>
@@ -62,11 +62,11 @@ const Notes = () => {
       </p>
       <p>
         In developing this project, I tested the validation by entering invalid inputs and Tested the responsiveness in
-        Firefox responsive mode. In addition typescript is used to reduce human error in the build time.
+        Firefox responsive mode. In addition typescript type checking is used to reduce human error in the build time.
       </p>
       <h3 className='text-2xl font-bold tracking-tight text-slate-800 !mt-8'>Form Validation</h3>
       <p>
-        I used zod for form validation. Although I have not uses zod typescript benefits, but they become very helpful
+        I used zod for form validation. It also provide great  typescript support that become very helpful
         as the project grows.
       </p>
       <h3 className='text-2xl font-bold tracking-tight !mt-8'>Responsiveness</h3>
