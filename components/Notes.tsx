@@ -4,7 +4,7 @@ import image from '../public/error-handling.png';
 const Notes = () => {
   return (
     <div className='mt-40 mx-auto max-w-screen-md space-y-4 pb-32'>
-      <h2 className='text-4xl font-bold text-center tracking-tight !mb-8 text-slate-700'>
+      <h2 className='text-4xl font-bold text-center tracking-tight !mb-16 text-slate-700'>
         Some Notes About the Solution
       </h2>
 
