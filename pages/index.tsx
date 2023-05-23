@@ -67,13 +67,7 @@ const Home: NextPage = () => {
 
   const termOfLoan = useWatch({ control, name: 'termOfLoan' });
 
-  // const debouncedRegister = (fieldName: string) => {
-  //   const { ref, name, onChange, onBlur } = register(fieldName);
 
-  //   const debouncedOnChange = (e) => {
-  //     debounce((e) => onChange(e), 300);
-  //   };
-  // };
   const debouncedOnInput = debounce((e) => handleSubmit(onSubmit)(e), 500);
 
   return (
