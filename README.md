@@ -1,16 +1,4 @@
-## Notes on the Solution
 
-### Accessability
-
-### Form Handling and Validation
-
-### Debounced Inputs
-
-### Loading State and Server Errors
-
-### Responsiveness
-
-## Getting Started
 
 First, run the development server:
 

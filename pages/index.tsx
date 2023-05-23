@@ -9,6 +9,7 @@ import { formatNumber } from '../utils/formatter';
 import { debounce } from '../utils/debounce';
 import errorIcon from '../public/error-icon.svg';
 import Image from 'next/image';
+import Notes from '../components/Notes';
 
 const schema = z.object({
   principal: z
@@ -128,7 +129,7 @@ const Home: NextPage = () => {
                 {watch('annualInterestRate')}%
               </p>
               <div className='flex flex-col  sm:flex-col-reverse'>
-                <p  className='flex justify-between'>
+                <p className='flex justify-between'>
                   <span>
                     <span className='sr-only'>From</span> 0
                   </span>
@@ -195,6 +196,7 @@ const Home: NextPage = () => {
           </div>
         </div>
       </div>
+      <Notes />
     </div>
   );
 };
