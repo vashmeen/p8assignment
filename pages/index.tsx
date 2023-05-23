@@ -7,25 +7,28 @@ import { ErrorMessage } from '@hookform/error-message';
 import Button from '../components/Button';
 import { formatNumber } from '../utils/formatter';
 import { debounce } from '../utils/debounce';
+import errorIcon from '../public/error-icon.svg';
+import Image from 'next/image';
+
 const schema = z.object({
   principal: z
     .string()
     .min(1, 'Please provide the Principal.')
-    .regex(/\d+/, 'Please provide a number for the Purchase Price.')
+    .regex(/^\d+$/, 'Please provide a number for the Purchase Price.')
     .refine((val) => Number(val) >= 50000 && Number(val) <= 2500000, {
       message: 'The Purchase Price should be between 50K and 2.5M.',
     }),
   annualInterestRate: z
     .string()
     .min(1, 'Please provide the Interest Rate.')
-    .regex(/\d+/, 'Please provide a number for the Interest Rate')
+    .regex(/^\d*\.?\d*$/, 'Please provide a number for the Interest Rate')
     .refine((val) => Number(val) >= 0 && Number(val) <= 25, {
       message: 'The Interest Rate should be between 0 and 25 percent.',
     }),
   termOfLoan: z
     .string()
     .min(1, 'Please select the Term of Loan.')
-    .regex(/\d+/, 'Please provide a number for the Term of Loan.')
+    .regex(/^\d+$/, 'Please provide a number for the Term of Loan.')
     .refine((val) => Number(val) >= 20 && Number(val) <= 30, {
       message: 'The Term of Loan should be between 20 and 30 years.',
     }),
@@ -97,10 +100,14 @@ const Home: NextPage = () => {
                 {formatNumber(Number(watch('principal')))}
               </p>
               <div className='flex flex-col  sm:flex-col-reverse'>
-                <div aria-hidden className='flex justify-between'>
-                  <span>$50K</span>
-                  <span>$2.5M</span>
-                </div>
+                <p className='flex justify-between'>
+                  <span>
+                    <span className='sr-only'>From</span> $50K
+                  </span>
+                  <span>
+                    <span className='sr-only'>From</span> $2.5M
+                  </span>
+                </p>
                 <input
                   id='price'
                   type='range'
@@ -121,10 +128,14 @@ const Home: NextPage = () => {
                 {watch('annualInterestRate')}%
               </p>
               <div className='flex flex-col  sm:flex-col-reverse'>
-                <div aria-hidden className='flex justify-between'>
-                  <span>0</span>
-                  <span>25%</span>
-                </div>
+                <p  className='flex justify-between'>
+                  <span>
+                    <span className='sr-only'>From</span> 0
+                  </span>
+                  <span>
+                    <span className='sr-only'>to</span> 25%
+                  </span>
+                </p>
                 <input
                   type='range'
                   id='interest'
@@ -173,42 +184,14 @@ const Home: NextPage = () => {
               </label>
             </fieldset>
           </form>
-          <div className='block  bg-slate-100 rounded-3xl shadow-2xl shadow-blue-200  ' style={{ minHeight: '18rem' }}>
-            {!isSubmitted && !isSubmitting && (
-              <p className='font-bold text-slate-500 h-full flex flex-col items-center justify-center'>
-                Select the mortgage you like{' '}
-              </p>
-            )}
-            {isSubmitting ? (
-              <p className='font-bold text-slate-500 h-full flex flex-col items-center justify-center' role='alert'>
-                Calculating...
-              </p>
-            ) : (
-              <>
-                {isSubmitSuccessful ? (
-                  <Output monthlyPayment={monthlyPayment} />
-                ) : (
-                  <div className='font-bold text-slate-500 h-full flex flex-col items-center justify-center gap-2'>
-                    <ErrorMessage
-                      errors={errors}
-                      name='annualInterestRate'
-                      as='p'
-                      role='alert'
-                      className='text-red-700'
-                    />
-                    <ErrorMessage errors={errors} name='termOfLoan' as='p' role='alert' className='text-red-700' />
-                    <ErrorMessage errors={errors} name='principal' as='p' role='alert' className='text-red-700' />
-                    <ErrorMessage
-                      errors={errors}
-                      name='root.serverError'
-                      as='p'
-                      role='alert'
-                      className='text-red-700'
-                    />
-                  </div>
-                )}
-              </>
-            )}
+          <div
+            className='block  bg-slate-100 rounded-3xl shadow-2xl shadow-blue-200 font-bold  '
+            style={{ minHeight: '18rem' }}
+          >
+            {isSubmitting && <Loading />}
+            {!isSubmitting && !isSubmitted && <InitialScreen />}
+            {!isSubmitting && isSubmitted && !isSubmitSuccessful && <Errors errors={errors} />}
+            {!isSubmitting && isSubmitted && isSubmitSuccessful && <Output monthlyPayment={monthlyPayment} />}
           </div>
         </div>
       </div>
@@ -218,13 +201,39 @@ const Home: NextPage = () => {
 
 export default Home;
 
+const InitialScreen = () => {
+  return (
+    <p className=' text-slate-500 h-full flex flex-col items-center justify-center'>Select the mortgage you like.</p>
+  );
+};
+const Loading = () => {
+  return (
+    <p className=' text-slate-500 h-full flex flex-col items-center justify-center' role='alert'>
+      Calculating...
+    </p>
+  );
+};
+const Errors = ({ errors }) => {
+  return (
+    <div className=' text-red-700  h-full flex flex-col items-center justify-center gap-2 bg-red-100 rounded-3xl'>
+      <Image src={errorIcon} alt='' width={50} height={50} />
+      <div>
+        <ErrorMessage errors={errors} name='annualInterestRate' as='p' role='alert' />
+        <ErrorMessage errors={errors} name='termOfLoan' as='p' role='alert' />
+        <ErrorMessage errors={errors} name='principal' as='p' role='alert' />
+        <ErrorMessage errors={errors} name='root.serverError' as='p' role='alert' />
+      </div>
+    </div>
+  );
+};
+
 const Output = ({ monthlyPayment }: { monthlyPayment: string }) => {
   return (
     <div className='h-full flex flex-col items-center justify-center  relative'>
       <output
         htmlFor='principal annualInterestRate termOfLoan   '
         form='mortgage-calculator-form'
-        className='p-8 py-16 h-full flex flex-col items-center justify-between font-bold '
+        className='p-8 py-16 h-full flex flex-col items-center justify-between '
       >
         <span className='block  text-slate-500'>Your total monthly payment will be</span>
         <Price amount={Number(monthlyPayment)} currency='USD' currencySign='$' />
@@ -234,7 +243,7 @@ const Output = ({ monthlyPayment }: { monthlyPayment: string }) => {
         </span>
         <span className='sr-only'>To apply, press the apply button below.</span>
       </output>
-      <Button className=' absolute bottom-0  translate-y-1/2'>Apply Today</Button>
+      <Button className=' absolute bottom-0  translate-y-1/2 font-normal'>Apply Today</Button>
     </div>
   );
 };
@@ -264,65 +273,3 @@ const Price = ({
     </span>
   );
 };
-
-// const ExponentialRange = () => {
-//   const steps = 2450;
-//   const [step, setStep] = useState();
-
-//   const calcStep = (val) => {
-//     const v = Number(v);
-//     if (v <= 100000) setStep(50000 / steps);
-//     if (v > 100000 && v <= 250000) setStep(150000 / steps);
-//     if (v > 250000 && v <= 1000000) setStep(750000 / steps);
-//     if (v > 250000 && v <= 1000000) setStep(1500000 / steps);
-//   };
-//   <input
-//     id='price'
-//     type='range'
-//     min='50000'
-//     max='2500000000'
-//     step='50000'
-//     {...register('principal')}
-//     onChange={(e) => {
-//       const v = e.target.value;
-//     }}
-//   />;
-// };
-
-// / A debounced input react component. For performance reasons the value changes after half a second.
-// function InputDebaounced({
-//   initialValue,
-//   onChange,
-//   debounceTime = 500,
-//   className,
-//   ...props
-// }: {
-//   initialValue: string | number;
-//   onChange: (value: string | number) => void;
-//   debounceTime?: number;
-//   className?: string;
-// } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'>) {
-//   const [value, setValue] = useState(initialValue);
-
-//   useEffect(() => {
-//     setValue(initialValue);
-//   }, [initialValue]);
-
-//   useEffect(() => {
-//     const timeout = setTimeout(() => {
-//       onChange(value);
-//     }, debounceTime);
-
-//     return () => clearTimeout(timeout);
-//   }, [value]);
-
-//   return (
-//     <input
-//       {...props}
-//       value={value}
-//       onChange={(e) => setValue(e.target.value)}
-//       // size={1}
-//       className={className}
-//     />
-//   );
-// }
