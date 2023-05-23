@@ -121,7 +121,7 @@ const Home: NextPage = () => {
                 Interest Rate
               </label>
               <p aria-hidden className='font-medium text-4xl mb-2'>
-                {watch('annualInterestRate')}%
+                {watch('annualInterestRate') }%
               </p>
               <div className='flex flex-col  sm:flex-col-reverse'>
                 <p className='flex justify-between'>

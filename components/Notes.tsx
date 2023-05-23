@@ -1,3 +1,6 @@
+import Image from 'next/image';
+import image from '../public/error-handling.png';
+
 const Notes = () => {
   return (
     <div className='mt-40 mx-auto max-w-screen-md space-y-4 pb-32'>
@@ -37,6 +40,9 @@ const Notes = () => {
         React-Hook-form is used for client-side validation. It catches all errors, even if user change input types
         through dev tools.
       </p>
+      <div className='rounded-2xl !my-12 overflow-hidden shadow-2xl shadow-slate-400 isolate p-4 bg-slate-50'>
+        <Image src={image} alt='' className='rounded-lg'  />
+      </div>
       <p>
         It also provides many helpful features, such as the state of submission or validation that I used to render
         related information accordingly. This way, I don&apos;t need to handle the state of form with useState and
@@ -53,21 +59,21 @@ const Notes = () => {
       </p>
       <h3 className='text-2xl font-bold tracking-tight text-slate-800 !mt-8'>Testing the UI</h3>
       <p>
-        Unit tests and end-to-end test are very helpful when the app is matured and stabilized. In
-        those cases, react unit-tests of end-to-end tests can help to prevent bugs when we add new features to the
-        application.{' '}
+        Unit tests and end-to-end test are very helpful when the app is matured and stabilized. In those cases, react
+        unit-tests of end-to-end tests can help to prevent bugs when we add new features to the application.{' '}
       </p>
       <p>
         But, when the application is in the early stage and is being changed rapidly, manual tests are more helpful.
       </p>
       <p>
         In developing this project, I tested the validation by entering invalid inputs and Tested the responsiveness in
-        Firefox responsive mode. In addition typescript type checking and eslint are used to reduce human error in the build time. Moreover build test are always necessary and is done for this project.
+        Firefox responsive mode. In addition typescript type checking and eslint are used to reduce human error in the
+        build time. Moreover build test are always necessary and is done for this project.
       </p>
       <h3 className='text-2xl font-bold tracking-tight text-slate-800 !mt-8'>Form Validation</h3>
       <p>
-        I used zod for form validation. It also provide great  typescript support that become very helpful
-        as the project grows.
+        I used zod for form validation. It also provide great typescript support that become very helpful as the project
+        grows.
       </p>
       <h3 className='text-2xl font-bold tracking-tight !mt-8'>Responsiveness</h3>
       <p>
@@ -83,6 +89,5 @@ const Notes = () => {
     </div>
   );
 };
-
 
 export default Notes;
