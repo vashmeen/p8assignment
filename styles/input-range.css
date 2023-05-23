@@ -5,7 +5,8 @@
 
 input[type='range'] {
   --thumb-height: 1.3rem;
-  --thumb-color: currentColor;
+  --thumb-color: white;
+  --thumb-border-color: currentColor;
   --progress-color: currentColor;
   --track-height: 0.2rem;
   --track-color: rgba(0, 0, 0, 0.2);
@@ -55,6 +56,8 @@ input[type='range']::-webkit-slider-thumb {
   background: linear-gradient(var(--thumb-color) 0 0) scroll no-repeat left center / 50% calc(var(--track-height) + 1px);
   background-color: var(--thumb-color);
   box-shadow: var(--box-fill);
+  border: 3px solid var(--thumb-border-color);
+  box-sizing: border-box;
   border-radius: var(--thumb-width, var(--thumb-height));
 
   clip-path: polygon(
@@ -104,7 +107,8 @@ input[type='range']::-moz-range-progress {
 
 input[type='range']::-moz-range-thumb {
   background: var(--thumb-color);
-  border: 0;
+  border: 3px solid var(--thumb-border-color);
+  box-sizing: border-box;
   width: var(--thumb-width, var(--thumb-height));
   border-radius: var(--thumb-width, var(--thumb-height));
   cursor: grab;

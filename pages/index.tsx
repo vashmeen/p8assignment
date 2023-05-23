@@ -257,9 +257,9 @@ const Price = ({
         {int} dollars {cents && <>and {cents}</>}
       </span>
       <span className='font-bold' aria-hidden='true'>
-        <span className='text-4xl  align-top '>{currencySign}</span>
-        <span className='text-7xl font-black'>{formatNumber(int)}</span>
-        {cents && <span className=' text-4xl align-top '>{cents.toFixed(0).padStart(2, '0')}</span>}
+        <span className='text-xl sm:text-4xl  align-top '>{currencySign}</span>
+        <span className='text-4xl sm:text-7xl font-black'>{formatNumber(int)}</span>
+        {cents && <span className='text-xl  sm:text-4xl align-top '>{cents.toFixed(0).padStart(2, '0')}</span>}
       </span>
     </span>
   );
