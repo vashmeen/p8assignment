@@ -92,7 +92,7 @@ const Home: NextPage = () => {
               <label htmlFor='price' className='grid text-slate-400 font-medium text-sm'>
                 Purchase Price
               </label>
-              <p className='font-medium text-2xl' aria-hidden>
+              <p className='font-medium text-4xl' aria-hidden>
                 <span>$</span>
                 {formatNumber(Number(watch('principal')))}
               </p>
@@ -102,15 +102,21 @@ const Home: NextPage = () => {
                 min='50000'
                 max='2500000'
                 step='50000'
+                className='text-blue-600'
                 {...register('principal')}
                 // onChange={(e) => debounce(() => register('principal').onChange(e), 5000)}
               />
+
+              <div aria-hidden className='flex justify-between'>
+                <span>$50K</span>
+                <span>$2.5M</span>
+              </div>
             </div>
             <div className='grid gap-2 focus-within:ring-purple-300'>
               <label htmlFor='interest' className='grid text-slate-400 font-bold text-sm  '>
                 Interest Rate
               </label>
-              <p aria-hidden className='font-medium text-2xl'>
+              <p aria-hidden className='font-medium text-4xl'>
                 {watch('annualInterestRate')}%
               </p>
               <input
@@ -119,9 +125,14 @@ const Home: NextPage = () => {
                 min='0'
                 max='25'
                 step='0.5'
+                className=' text-blue-600'
                 {...register('annualInterestRate')}
                 // onChange={(e) => debounce(() => register('annualInterestRate').onChange(e), 5000)}
               />
+              <div aria-hidden className='flex justify-between'>
+                <span>0</span>
+                <span>25%</span>
+              </div>
             </div>
             <fieldset className='grid gap-4 focus-within:ring-purple-300'>
               <legend className='mb-4 text-slate-400 font-bold text-sm'>Period</legend>
@@ -131,7 +142,7 @@ const Home: NextPage = () => {
                   // onChange={(e) => debounce(() => register('termOfLoan').onChange(e), 5000)}
                   type='radio'
                   value='20'
-                  className='w-6 h-6 text-purple-900'
+                  className='w-6 h-6 text-purple-900 '
                   style={{ accentColor: 'currentColor' }}
                   id='termOfLoan-20'
                 />
@@ -166,7 +177,7 @@ const Home: NextPage = () => {
               </label>
             </fieldset>
           </form>
-          <div className='block  bg-slate-100 rounded-3xl shadow-2xl ' style={{ minHeight: '18rem' }}>
+          <div className='block  bg-slate-100 rounded-3xl shadow-2xl shadow-blue-200  ' style={{ minHeight: '18rem' }}>
             {!isSubmitted && !isSubmitting && (
               <p className='font-bold text-slate-500 h-full flex flex-col items-center justify-center'>
                 Select the mortgage you like{' '}

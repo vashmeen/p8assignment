@@ -1,4 +1,5 @@
 import '../styles/globals.css';
+import '../styles/input-range.css';
 import Header from '../components/Header';
 import type { AppProps } from 'next/app';
 import '@fontsource/inter/400.css';
