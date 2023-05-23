@@ -87,6 +87,11 @@ const Notes = () => {
           Slider max and min labels are put at the top on mobile screens, so users still can read them while adjusting
           the slider.
         </li>
+        <li>
+          Slider are generally hard to use in mobile devices. To make it easier I added step for each slider. So the first slider increments by 50K and the second one increment by 5 percent.
+          This will prevent arbitrary number in between, and users do not need to adjust the slider precisely, which is an imposable task on a small screen! 
+        </li>
+        <li>Bold outlines are set for interactive elements, so people who want to navigate with keyboard can easily do using TAB. </li>
       </ul>
     </div>
   );
