@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
-import { useState } from 'react';
+import React, { DOMAttributes, useState } from 'react';
 import { z } from 'zod';
-import { useForm, useWatch } from 'react-hook-form';
+import { useForm, useWatch, SubmitHandler, FieldErrors } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ErrorMessage } from '@hookform/error-message';
 import Button from '../components/Button';
@@ -34,6 +34,8 @@ const schema = z.object({
       message: 'The Term of Loan should be between 20 and 30 years.',
     }),
 });
+
+type FormValues = z.infer<typeof schema>;
 const Home: NextPage = () => {
   const {
     register,
@@ -42,7 +44,7 @@ const Home: NextPage = () => {
     setError,
     watch,
     control,
-  } = useForm({
+  } = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
       principal: '250000',
@@ -50,10 +52,10 @@ const Home: NextPage = () => {
       termOfLoan: '25',
     },
   });
-  const [monthlyPayment, setMonthlyPayment] = useState<string | null>('853.5');
+  const [monthlyPayment, setMonthlyPayment] = useState<string>('');
 
-  const onSubmit = async (values) => {
-    setMonthlyPayment(null);
+  const onSubmit: SubmitHandler<FormValues> = async (values) => {
+    setMonthlyPayment('');
     const queryString = new URLSearchParams(values);
     const res = await fetch('/api/mortgageCalculation?' + queryString, {
       method: 'POST',
@@ -67,8 +69,7 @@ const Home: NextPage = () => {
 
   const termOfLoan = useWatch({ control, name: 'termOfLoan' });
 
-
-  const debouncedOnInput = debounce((e) => handleSubmit(onSubmit)(e), 500);
+  const debouncedOnInput = debounce(handleSubmit(onSubmit), 500);
 
   return (
     <div className=' p-4 '>
@@ -209,7 +210,7 @@ const Loading = () => {
     </p>
   );
 };
-const Errors = ({ errors }) => {
+const Errors = ({ errors }: { errors: FieldErrors<FormValues> }) => {
   return (
     <div className=' text-red-700  h-full flex flex-col items-center justify-center gap-2 bg-red-100 rounded-3xl'>
       <Image src={errorIcon} alt='' width={50} height={50} />
@@ -217,7 +218,8 @@ const Errors = ({ errors }) => {
         <ErrorMessage errors={errors} name='annualInterestRate' as='p' role='alert' />
         <ErrorMessage errors={errors} name='termOfLoan' as='p' role='alert' />
         <ErrorMessage errors={errors} name='principal' as='p' role='alert' />
-        <ErrorMessage errors={errors} name='root.serverError' as='p' role='alert' />
+        <ErrorMessage errors={errors} name='root.serverError' as='p' role='alert' /> 
+        {/* about the type error:  react-hook-form introduced the server errors recently but has not supported it in type script */}
       </div>
     </div>
   );
