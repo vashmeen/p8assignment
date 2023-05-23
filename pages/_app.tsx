@@ -10,7 +10,7 @@ import '@fontsource/inter/900.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <div className="h-full text-slate-700">
+    <div className="h-full text-slate-700 bg-blue-100">
       <Header />
       <main>
         <Component {...pageProps} />
