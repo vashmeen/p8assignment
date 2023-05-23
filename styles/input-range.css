@@ -3,15 +3,20 @@
 /* original trick  https://codepen.io/ShadowShahriar/pen/zYPPYrQ  */
 /* === range theme and appearance === */
 
-
 input[type='range'] {
-  --thumb-height: 1.5rem;
+  --thumb-height: 1.3rem;
   --thumb-color: currentColor;
   --progress-color: currentColor;
   --track-height: 0.2rem;
   --track-color: rgba(0, 0, 0, 0.2);
   /* --thumb-color-hover: skyblue; */
   --clip-edges: 0.125em;
+}
+
+@media (max-width: 40rem) {
+  input[type='range'] {
+    --thumb-height: 1.8rem;
+  }
 }
 
 /* === range commons === */
