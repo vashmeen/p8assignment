@@ -62,7 +62,7 @@ const Notes = () => {
       </p>
       <p>
         In developing this project, I tested the validation by entering invalid inputs and Tested the responsiveness in
-        Firefox responsive mode. In addition typescript type checking is used to reduce human error in the build time.
+        Firefox responsive mode. In addition typescript type checking and eslint are used to reduce human error in the build time. Moreover build test are always necessary and is done for this project.
       </p>
       <h3 className='text-2xl font-bold tracking-tight text-slate-800 !mt-8'>Form Validation</h3>
       <p>

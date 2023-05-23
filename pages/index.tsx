@@ -218,7 +218,8 @@ const Errors = ({ errors }: { errors: FieldErrors<FormValues> }) => {
         <ErrorMessage errors={errors} name='annualInterestRate' as='p' role='alert' />
         <ErrorMessage errors={errors} name='termOfLoan' as='p' role='alert' />
         <ErrorMessage errors={errors} name='principal' as='p' role='alert' />
-        <ErrorMessage errors={errors} name='root.serverError' as='p' role='alert' /> 
+        {/*  @ts-ignore */}
+        <ErrorMessage errors={errors} name='root.serverError' as='p' role='alert' />
         {/* about the type error:  react-hook-form introduced the server errors recently but has not supported it in type script */}
       </div>
     </div>
